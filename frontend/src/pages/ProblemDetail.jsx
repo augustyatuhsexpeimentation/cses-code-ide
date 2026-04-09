@@ -84,6 +84,11 @@ export default function ProblemDetail() {
     );
   }
 
+  function handleResetCode() {
+    setCode(language === "python" ? PYTHON_TEMPLATE : CPP_TEMPLATE);
+    setRunState({ loading: false, data: null, error: "" });
+  }
+
   async function handleRun() {
     try {
       setRunState({ loading: true, data: null, error: "" });
@@ -183,14 +188,20 @@ export default function ProblemDetail() {
                   </select>
                 </div>
 
-                <label className="checkbox-row">
-                  <input
-                    type="checkbox"
-                    checked={useExamples}
-                    onChange={(e) => setUseExamples(e.target.checked)}
-                  />
-                  Use example test cases
-                </label>
+                <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+                  <button className="secondary-btn" onClick={handleResetCode}>
+                    Reset Code
+                  </button>
+
+                  <label className="checkbox-row">
+                    <input
+                      type="checkbox"
+                      checked={useExamples}
+                      onChange={(e) => setUseExamples(e.target.checked)}
+                    />
+                    Use example test cases
+                  </label>
+                </div>
               </div>
 
               <label className="label">Code</label>
